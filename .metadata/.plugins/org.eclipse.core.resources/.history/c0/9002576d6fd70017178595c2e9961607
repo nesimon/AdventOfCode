@@ -1,0 +1,40 @@
+import java.io.*;
+ 
+public class CheckSum {
+	public static void main(String[] args) throws Exception {
+		
+		BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+		String testInput = "";
+	    String line = br.readLine();
+
+	    while (line != null) {
+	    	testInput += line;
+	    	testInput += " ";
+	        line = br.readLine();
+	    }
+
+		String[] answer = testInput.split("\\s+");
+		int total = 0;
+		int count = 0;
+		for(int i = 0; i < answer.length; i++)
+		{
+			for(int j = i; j < answer.length; j++)
+			{
+				if(Integer.parseInt(answer[i])%Integer.parseInt(answer[j]) == 0)
+				{
+					total += Integer.parseInt(answer[i])/Integer.parseInt(answer[j]);
+				}
+				if(Integer.parseInt(answer[j])%Integer.parseInt(answer[i]) == 0)
+				{
+					total += Integer.parseInt(answer[j])/Integer.parseInt(answer[i]);
+				}
+				if(count == 15)
+				{
+					count = -1;
+				}
+				count++;
+			}
+		}
+		System.out.print(total);
+	}
+}

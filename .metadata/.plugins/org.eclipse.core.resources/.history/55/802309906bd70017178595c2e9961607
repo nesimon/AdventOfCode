@@ -1,0 +1,49 @@
+import java.io.*;
+ 
+public class CheckSum {
+	public static void main(String[] args) throws Exception {
+		
+		BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+		String testInput = "";
+	    String line = br.readLine();
+
+	    while (line != null) {
+	    	testInput += line;
+	    	testInput += " ";
+	        line = br.readLine();
+	    }
+
+		String[] answer = testInput.split("\\s+");
+		int total = 0;
+		int count = 0;
+		int tempMin = Integer.parseInt(answer[0]);
+		int tempMax = Integer.parseInt(answer[0]);
+		for(int i = 0; i < answer.length; i++)
+		{
+			System.out.println("Int array = " + Integer.parseInt(answer[i]));	
+			if(tempMin > Integer.parseInt(answer[i]))
+			{
+				System.out.println("Int i = " + Integer.parseInt(answer[i]));
+				tempMin = Integer.parseInt(answer[i]);
+				System.out.println("Int tempMin = " + tempMin);
+			}
+			else if(tempMax < Integer.parseInt(answer[i]))
+			{
+				System.out.println("Int i = " + Integer.parseInt(answer[i]));
+				tempMax = Integer.parseInt(answer[i]);
+				System.out.println("Int tempMax = " + tempMax);
+			}
+			
+			if(count == 3)
+			{
+				total += tempMax - tempMin;
+				System.out.println("Int total                   = " + total);
+				tempMin =  Integer.parseInt(answer[i+1]);
+				tempMax =  Integer.parseInt(answer[i+1]);;
+				count = 0;
+			}
+			count++;
+		}
+		System.out.print(total);
+	}
+}

@@ -17,26 +17,28 @@ public class Challenge2Part2 {
 		String[] answer = testInput.split("\\s+");
 		int total = 0;
 		int count = 0;
-		for(int i = 0; i < answer.length; i++)
+		for(int i = 0; i < answer.length-1; i++)
 		{
 			int count2 = 0;
-			for(int j = i; count2 != (15-count); j++)
+			for(int j = i+1; count2 < (15-count); j++)
 			{
 				if(Integer.parseInt(answer[i])%Integer.parseInt(answer[j]) == 0)
 				{
 					total += Integer.parseInt(answer[i])/Integer.parseInt(answer[j]);
+					count2 = count+3;
 				}
-				if(Integer.parseInt(answer[j])%Integer.parseInt(answer[i]) == 0)
+				else if(Integer.parseInt(answer[j])%Integer.parseInt(answer[i]) == 0)
 				{
 					total += Integer.parseInt(answer[j])/Integer.parseInt(answer[i]);
+					count2 = count+3;
 				}
 				count2++;
 			}
-			count++;
 			if(count == 15)
 			{
-				count = 0;
+				count = -1;
 			}
+			count++;
 		}
 		System.out.print(total);
 	}
